@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectDictionaryMapper", "ObjectDictionaryMapper\ObjectDictionaryMapper.csproj", "{ED200F38-8710-4D6E-AA96-F922F65E110E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectDictionaryMapper.Tests", "ObjectDictionaryMapper.Tests\ObjectDictionaryMapper.Tests.csproj", "{29ABD29A-8038-4941-B1C0-E7B0D4E5CC94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{ED200F38-8710-4D6E-AA96-F922F65E110E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED200F38-8710-4D6E-AA96-F922F65E110E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED200F38-8710-4D6E-AA96-F922F65E110E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29ABD29A-8038-4941-B1C0-E7B0D4E5CC94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29ABD29A-8038-4941-B1C0-E7B0D4E5CC94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29ABD29A-8038-4941-B1C0-E7B0D4E5CC94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29ABD29A-8038-4941-B1C0-E7B0D4E5CC94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
