@@ -43,7 +43,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeMapping\BooleanTypeMapper.cs" />
     <Compile Include="TypeMapping\DateTimeTypeMapper.cs" />
-    <Compile Include="TypeMapping\DefaultMapper.cs" />
     <Compile Include="TypeMapping\DoubleTypeMapper.cs" />
     <Compile Include="TypeMapping\IntTypeMapper.cs" />
     <Compile Include="TypeMapping\ITypeMapper.cs" />

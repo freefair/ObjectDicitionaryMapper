@@ -4,27 +4,27 @@ using System.Globalization;
 
 namespace ObjectDictionaryMapper.TypeMapping
 {
-	public class DateTimeTypeMapper : DefaultMapper
+	public class DateTimeTypeMapper : ITypeMapper
 	{
-		public DateTimeFormatInfo DateTimeFormatInfo { get; set; } = DateTimeFormatInfo.InvariantInfo;
+		public DateTimeFormatInfo FormatInfo { get; set; } = DateTimeFormatInfo.InvariantInfo;
 		
-		public override bool CanHandle(Type type)
+		public bool CanHandle(Type type)
 		{
 			return type == typeof(DateTime);
 		}
 
-		public override object ToDictionaryType(object src)
+		public object ToDictionaryType(object src)
 		{
-			return ((DateTime)src).ToString(DateTimeFormatInfo);
+			return ((DateTime)src).ToString(FormatInfo);
 		}
 
-		public override object FromDictionaryType(object src, Type destType)
+		public object FromDictionaryType(object src, Type destType)
 		{
 			if (src == null) return null;
 			if (destType.IsInstanceOfType(src)) return src;
 			if (src is string s)
-				return DateTime.Parse(s, DateTimeFormatInfo);
-			return DateTime.MinValue;
+				return DateTime.Parse(s, FormatInfo);
+			return default(DateTime);
 		}
 	}
 }
