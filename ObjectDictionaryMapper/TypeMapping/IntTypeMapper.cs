@@ -10,7 +10,10 @@ namespace ObjectDictionaryMapper.TypeMapping
 		
 		public bool CanHandle(Type type)
 		{
-			return type == typeof(int) || type == typeof(short) || type == typeof(byte) || type == typeof(long);
+			return type == typeof(int) || type == typeof(uint)
+			       || type == typeof(short) || type == typeof(ushort)
+			       || type == typeof(byte)
+			       || type == typeof(long) || type == typeof(ulong);
 		}
 
 		public object ToDictionaryType(object src)

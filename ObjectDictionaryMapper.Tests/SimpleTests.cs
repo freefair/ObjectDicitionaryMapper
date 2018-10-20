@@ -63,6 +63,22 @@ namespace ObjectDictionaryMapper.Tests
 			Assert.That(simpleObjectTwo.StringssProperty, Has.One.Contains("Test012"));
 			Assert.That(simpleObjectTwo.SimpleObject, Is.Not.Null);
 			Assert.That(simpleObjectTwo.SimpleObject.BoolProperty, Is.EqualTo(true));
+			
+			Assert.That(simpleObjectTwo.DictProperty, Is.Not.Null);
+			Assert.That(simpleObjectTwo.DictProperty, Does.ContainKey("Test").And.ContainValue(123));
+			Assert.That(simpleObjectTwo.DictProperty, Does.ContainKey("Test2").And.ContainValue(456));
+		}
+
+		[Test]
+		public void SimpleDictionaryTest()
+		{
+			Dictionary<SimpleObject, string> TestMap = new Dictionary<SimpleObject, string>()
+			{
+				[new SimpleObject()] = "test"
+			};
+
+			var dictionary = Mapper.ToDictionary(TestMap);
+			Assert.That(dictionary, Is.Not.Null);
 		}
 	}
 }

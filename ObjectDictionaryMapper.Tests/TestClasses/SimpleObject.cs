@@ -9,5 +9,9 @@ namespace ObjectDictionaryMapper.Tests.TestClasses
 		public double DoubleProperty { get; set; } = 123.321;
 		public DateTime DateTimeProperty { get; set; } = DateTime.MaxValue;
 		public bool BoolProperty { get; set; } = true;
+		public short ShortProperty { get; set; } = 123;
+		public byte ByteProperty { get; set; } = 123;
+		public long LongProperty { get; set; } = 123;
+		public uint UIntProperty { get; set; } = 123;
 	}
 }

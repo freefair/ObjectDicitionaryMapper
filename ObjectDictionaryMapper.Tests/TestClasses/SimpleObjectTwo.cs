@@ -7,6 +7,13 @@ namespace ObjectDictionaryMapper.Tests.TestClasses
 	{
 		public SimpleObject SimpleObject { get; set; } = new SimpleObject();
 		public string StringProperty { get; set; } = "Test321";
+
+		public Dictionary<String, int> DictProperty { get; set; } = new Dictionary<string, int>()
+		{
+			["Test"] = 123,
+			["Test2"] = 456
+		};
+		
 		public List<string> StringsProperty { get; set; } = new List<string> {
 			"Test123",
 			"Test456"

@@ -6,7 +6,7 @@ namespace ObjectDictionaryMapper
 {
 	public class MapperConfiguration
 	{
-		public static MapperConfiguration Default { get; set; } = new MapperConfiguration();
+		public static MapperConfiguration Default { get; } = new MapperConfiguration();
 
 		public IntTypeMapper IntTypeMapper { get; } = new IntTypeMapper();
 		public StringTypeMapper StringTypeMapper { get; } = new StringTypeMapper();

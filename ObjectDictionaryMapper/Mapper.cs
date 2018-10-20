@@ -10,7 +10,7 @@ namespace ObjectDictionaryMapper
 	{
 		private MapperConfiguration _configuration;
 
-		public static Dictionary<string, object> ToDictionary(Object src)
+		public static Dictionary<object, object> ToDictionary(Object src)
 		{
 			return new Mapper().ToDict(src);
 		}
@@ -46,7 +46,7 @@ namespace ObjectDictionaryMapper
 			return result;
 		}
 
-		private object MapList(IEnumerable entryValue, Type propertyInfoPropertyType)
+		private object MapList(object entryValue, Type propertyInfoPropertyType)
 		{
 			if (typeof(IDictionary).IsAssignableFrom(propertyInfoPropertyType))
 			{
@@ -58,7 +58,7 @@ namespace ObjectDictionaryMapper
 				resultType = propertyInfoPropertyType.GetGenericArguments().First();
 			var result = (IList)Activator.CreateInstance(propertyInfoPropertyType);
 
-			foreach (var o in entryValue)
+			foreach (var o in (IEnumerable) entryValue)
 			{
 				if(o == null) continue;
 				result.Add(MapDictValueToObj(o, resultType));
@@ -91,38 +91,40 @@ namespace ObjectDictionaryMapper
 			if (destType.IsInstanceOfType(value))
 				return value;
 			if (typeof(IEnumerable).IsAssignableFrom(destType))
-				return MapList(value as IEnumerable, destType);
+				return MapList(value, destType);
 			return ToObj((IDictionary)value, destType);
 		}
 
-		public Dictionary<string, object> ToDict(object src)
+		public Dictionary<object, object> ToDict(object src)
 		{
 			if (src == null)
 				return null;
-			Dictionary<string, object> result = new Dictionary<string, object>();
+			Dictionary<object, object> result = new Dictionary<object, object>();
 
 			var type = src.GetType();
 			if (src is IDictionary dict)
 				foreach (DictionaryEntry o in dict)
-					result.Add(o.Key.ToString(), ToDict(o.Value));
+				{
+					result.Add(MapPropertyToDict(o.Key.GetType(), o.Key), MapPropertyToDict(o.Value.GetType(), o.Value));
+				}
 			else
 				foreach (var propertyInfo in type.GetProperties())
-					result.Add(propertyInfo.Name, MapPropertyToDict(propertyInfo, src));
+					result.Add(propertyInfo.Name, MapPropertyToDict(propertyInfo.PropertyType, propertyInfo.GetValue(src)));
 
 			return result;
 		}
 
-		private object MapPropertyToDict(PropertyInfo propertyInfo, object src)
+		private object MapPropertyToDict(Type srcType, object src)
 		{
-			var firstOrDefault = _configuration.TypeMappers.FirstOrDefault(t => t.CanHandle(propertyInfo.PropertyType));
-			var value = propertyInfo.GetValue(src);
-			return firstOrDefault != null ? firstOrDefault.ToDictionaryType(value) : MapObjectToDict(value);
+			var firstOrDefault = _configuration.TypeMappers.FirstOrDefault(t => t.CanHandle(srcType));
+			return firstOrDefault != null ? firstOrDefault.ToDictionaryType(src) : MapObjectToDict(src);
 		}
 
 		private object MapObjectToDict(object value)
 		{
 			if (value == null) return null;
 			if (!(value is IEnumerable enumerable)) return ToDict(value);
+			if (value is IDictionary dictionary) return ToDict(dictionary);
 			
 			IList list = new List<object>();
 			foreach (var o in enumerable)
@@ -132,7 +134,7 @@ namespace ObjectDictionaryMapper
 				var firstOrDefault = _configuration.TypeMappers.FirstOrDefault(t => t.CanHandle(type));
 				list.Add(firstOrDefault != null ? firstOrDefault.ToDictionaryType(o) : MapObjectToDict(o));
 			}
-				
+
 			return list;
 		}
 	}
