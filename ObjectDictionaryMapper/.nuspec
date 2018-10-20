@@ -8,7 +8,7 @@
         <version>1.8.3-beta</version>
 
         <!-- Authors contain text that appears directly on the gallery -->
-        <authors>Dejana Tesic, Rajeev Dey</authors>
+        <authors></authors>
 
         <!-- 
             Owners are typically nuget.org identities that allow gallery
