@@ -15,7 +15,7 @@ namespace ObjectDictionaryMapper.TypeMapping
 
 		public object ToDictionaryType(object src)
 		{
-			return ((long) src).ToString(FormatInfo);
+			return ((IFormattable) src).ToString(null, FormatInfo);
 		}
 
 		public object FromDictionaryType(object src, Type destType)

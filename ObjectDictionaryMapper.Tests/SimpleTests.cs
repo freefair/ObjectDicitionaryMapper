@@ -15,10 +15,10 @@ namespace ObjectDictionaryMapper.Tests
 			var obj = new SimpleObject();
 			var dictionary = Mapper.ToDictionary(obj);
 			Assert.That(dictionary, Does.ContainKey("StringProperty").And.ContainValue("Test123"));
-			Assert.That(dictionary, Does.ContainKey("IntProperty").And.ContainValue(123));
-			Assert.That(dictionary, Does.ContainKey("BoolProperty").And.ContainValue(true));
+			Assert.That(dictionary, Does.ContainKey("IntProperty").And.ContainValue("123"));
+			Assert.That(dictionary, Does.ContainKey("BoolProperty").And.ContainValue("True"));
 			Assert.That(dictionary, Does.ContainKey("DateTimeProperty").And.ContainValue(DateTime.MaxValue.ToString(DateTimeFormatInfo.InvariantInfo)));
-			Assert.That(dictionary, Does.ContainKey("DoubleProperty").And.ContainValue(123.321));
+			Assert.That(dictionary, Does.ContainKey("DoubleProperty").And.ContainValue("123.321"));
 
 			var simpleObject = Mapper.ToObject<SimpleObject>(dictionary);
 			Assert.That(simpleObject.BoolProperty, Is.EqualTo(true));
@@ -40,10 +40,10 @@ namespace ObjectDictionaryMapper.Tests
 			
 			var subObject = dictionary["SimpleObject"];
 			Assert.That(subObject, Does.ContainKey("StringProperty").And.ContainValue("Test123"));
-			Assert.That(subObject, Does.ContainKey("IntProperty").And.ContainValue(123));
-			Assert.That(subObject, Does.ContainKey("BoolProperty").And.ContainValue(true));
+			Assert.That(subObject, Does.ContainKey("IntProperty").And.ContainValue("123"));
+			Assert.That(subObject, Does.ContainKey("BoolProperty").And.ContainValue("True"));
 			Assert.That(subObject, Does.ContainKey("DateTimeProperty").And.ContainValue(DateTime.MaxValue.ToString(DateTimeFormatInfo.InvariantInfo)));
-			Assert.That(subObject, Does.ContainKey("DoubleProperty").And.ContainValue(123.321));
+			Assert.That(subObject, Does.ContainKey("DoubleProperty").And.ContainValue("123.321"));
 
 			var list = dictionary["StringsProperty"];
 			Assert.That(list, Does.Contain("Test123"));
